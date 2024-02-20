@@ -45,8 +45,7 @@ public class Proveedores implements Serializable {
     public List<Inventarios> getAlmacen() {
         return provee;
     }
-    public Proveedores(Long id, String nombre, String origen, String telefono, String email) {
-        this.id = id;
+    public Proveedores( String nombre, String origen, String telefono, String email) {
         this.nombre = nombre;
         this.origen = origen;
         this.telefono = telefono;

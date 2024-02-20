@@ -181,14 +181,6 @@ public class ProductosAPIREST {
         });
 
 
-
-        // Endpoint para obtener un resumen con solo el nombre el precio y la URL
-        Spark.get("/productos/resumenobjetos", (request, response) -> {
-            List<ProductosDTO> resumen = dao_prod.devolverNombreImagenes();
-            return gson.toJson(resumen);
-        });
-
-
         // Endpoint para obtener un resumen con solo el nombre el precio y la URL
         Spark.get("/Productos/resumenobjetos", (request, response) -> {
             List<ProductosDTO> resumen = dao_prod.devolverNombreImagenes();

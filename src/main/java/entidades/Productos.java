@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "Productos")
 public class Productos implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Expose
@@ -41,8 +40,6 @@ public class Productos implements Serializable {
     @Column(name = "Precio_Unitario",length = 10,nullable = false)
     @Expose
     private Double precio_uni;
-
-
 
     @Column(name = "Imagen")
     @Expose
