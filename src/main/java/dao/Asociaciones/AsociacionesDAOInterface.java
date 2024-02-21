@@ -1,6 +1,7 @@
 package dao.Asociaciones;
 
 import dto.ProductosDTO;
+import entidades.Categorias;
 import entidades.Productos;
 import entidades.Proveedores;
 
@@ -12,4 +13,5 @@ public interface AsociacionesDAOInterface {
     Proveedores obtenerProvedorProducto(Productos p);
 
     Double mediaPreciosProveedor(String proveedor);
+    List<Categorias> productoCategorias(Long idProducto);
 }

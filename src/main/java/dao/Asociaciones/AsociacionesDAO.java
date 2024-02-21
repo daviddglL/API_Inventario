@@ -1,5 +1,6 @@
 package dao.Asociaciones;
 
+import entidades.Categorias;
 import entidades.Productos;
 import entidades.Proveedores;
 import org.hibernate.Session;
@@ -7,6 +8,8 @@ import org.hibernate.query.Query;
 import util.HibernateUtil;
 
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AsociacionesDAO implements AsociacionesDAOInterface{
 
@@ -54,5 +57,28 @@ public class AsociacionesDAO implements AsociacionesDAOInterface{
         return media;
     }
 
+    @Override
+    public List<Categorias> productoCategorias(Long idProducto) {
+        List<Categorias> categorias = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            Query<Categorias> query = session.createQuery("SELECT t3.Nombre\n" +
+                    "FROM Inventarios t1\n" +
+                    "INNER JOIN Productos t2 ON t1.id = t2.id_producto\n" +
+                    "INNER JOIN producto_categoria pc ON t2.id_producto = pc.id_producto\n" +
+                    "INNER JOIN Categoria t3 ON pc.id_categoria = t3.id_categoria\n" +
+                    "WHERE t1.id = :id ", Categorias.class);
+            query.setParameter("idProducto", idProducto);
+            categorias = query.getResultList();
+        } catch (NoResultException nre) {
+            // Manejar la excepción si no se encuentra ningún resultado
+            categorias = new ArrayList<>();
+        } finally {
+            session.close();
+        }
+
+        return categorias;
+    }
 
 }

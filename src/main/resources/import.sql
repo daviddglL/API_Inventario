@@ -43,6 +43,7 @@ INSERT INTO categoria (nombre) VALUES ('Mobiliario');
 
 
 INSERT INTO producto_categoria (id_producto,id_categoria) VALUES (1,5);
+INSERT INTO producto_categoria (id_producto,id_categoria) VALUES (1,7);
 INSERT INTO producto_categoria (id_producto,id_categoria) VALUES (2,7);
 INSERT INTO producto_categoria (id_producto,id_categoria) VALUES (3,5);
 INSERT INTO producto_categoria (id_producto,id_categoria) VALUES (4,4);

@@ -57,7 +57,13 @@ public class ProductosDAO implements ProductosDAOInterface {
 
     @Override
     public Long totalMuebles() {
-        return null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Long contador = (Long) session.createQuery("select count(e) from Productos e").getSingleResult();
+
+        session.close();
+
+        return contador;
     }
 
 
@@ -116,7 +122,6 @@ public class ProductosDAO implements ProductosDAOInterface {
         List<Productos> filtro=new ArrayList<>();
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-
 
             // Consulta HQL
             Query<Productos> query = session.createQuery("from Productos as p where p.precio_uni>=:min and p.precio_uni<=:max and p.categoria in (:categorias)", Productos.class);

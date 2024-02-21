@@ -9,6 +9,7 @@ import dao.Inventario.InventarioDAOInterface;
 import dao.Productos.ProductosDAOInterface;
 import dao.Proveedores.ProveedoresDAOInterface;
 import dto.ProductosDTO;
+import entidades.Categorias;
 import entidades.Inventarios;
 import entidades.Productos;
 import entidades.Proveedores;
@@ -258,7 +259,7 @@ public class ProductosAPIREST {
 
 
         //DEVOLVER DATOS DE MANERA PAGINADA DE TODOS LOS MUEBLES
-        Spark.get("/Productos/paginado/:pagina/:tam_pagina", (request, response) -> {
+        Spark.get("/productos/paginado/:pagina/:tam_pagina", (request, response) -> {
 
             Integer pagina = Integer.parseInt(request.params("pagina"));
             Integer tamaño_pagina = Integer.parseInt(request.params("tam_pagina"));
@@ -355,6 +356,20 @@ public class ProductosAPIREST {
             Proveedores p = dao_asoc.obtenerProvedorProducto(pr);
             response.type("application/json");
             return gson.toJson(p);
+        });
+
+
+        Spark.get("/inventario/categorias/:id_producto", (request, response) -> {
+            Long idProducto = Long.parseLong(request.params(":id_producto"));
+            List<Categorias> categorias = dao_asoc.productoCategorias(idProducto);
+
+            if (categorias.isEmpty()) {
+                response.status(404); // Código de estado HTTP 404 - No encontrado
+                return "No se encontraron categorías para el producto con ID: " + idProducto;
+            } else {
+                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
+                return gson.toJson(categorias);
+            }
         });
 
 

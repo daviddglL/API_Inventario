@@ -1,7 +1,9 @@
 package dto;
 
-public class ProductosDTO {
+import com.google.gson.annotations.Expose;
 
+public class ProductosDTO {
+    @Expose
     private String nombre,url_imagen;
 
     public ProductosDTO(){}
