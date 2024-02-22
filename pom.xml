@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>API_Inventarios</artifactId>
+    <artifactId>API_Inventario</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

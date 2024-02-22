@@ -56,5 +56,26 @@ public class AsociacionesDAO implements AsociacionesDAOInterface{
         return media;
     }
 
+    @Override
+    public String inventarioCategorias(String almacen){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            Query<String> query = session.createQuery(
+                    "SELECT pa.producto FROM producto_almacen pa " +
+                            "WHERE pa.almacen = :almacen",
+                    String.class
+            );
+            query.setParameter("almacen", almacen);
+            List<String> productos = query.list();
+        }catch (NoResultException e) {
+        // Manejar la excepción si no se encuentra ningún resultado
+         e.printStackTrace();
+         } finally {
+                session.close();
+         }
+        return almacen;
+    }
+
 
 }

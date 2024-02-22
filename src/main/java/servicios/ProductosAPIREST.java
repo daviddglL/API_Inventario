@@ -3,12 +3,12 @@ package servicios;
 import com.appslandia.common.gson.LocalDateAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dao.Almacen.AlmacenDAOInterface;
 import dao.Asociaciones.AsociacionesDAOInterface;
-
-import dao.Inventario.InventarioDAOInterface;
 import dao.Productos.ProductosDAOInterface;
 import dao.Proveedores.ProveedoresDAOInterface;
 import dto.ProductosDTO;
+import entidades.Almacen;
 import entidades.Productos;
 import entidades.Proveedores;
 import spark.Spark;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ProductosAPIREST {
 
     private AsociacionesDAOInterface dao_asoc;
-    private InventarioDAOInterface dao_inv;
+    private AlmacenDAOInterface dao_alm;
     private ProductosDAOInterface dao_prod;
     private ProveedoresDAOInterface dao_prov;
 
@@ -29,10 +29,10 @@ public class ProductosAPIREST {
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
             .excludeFieldsWithoutExposeAnnotation().create();
 
-    public ProductosAPIREST(AsociacionesDAOInterface imple_asoc, InventarioDAOInterface imple_inv, ProveedoresDAOInterface imple_prov, ProductosDAOInterface imple_prod) throws Exception {
+    public ProductosAPIREST(AsociacionesDAOInterface imple_asoc, AlmacenDAOInterface imple_inv, ProveedoresDAOInterface imple_prov, ProductosDAOInterface imple_prod) throws Exception {
         Spark.port(8080);
         dao_asoc =imple_asoc;
-        dao_inv=imple_inv;
+        dao_alm=imple_inv;
         dao_prod=imple_prod;
         dao_prov=imple_prov;
 
@@ -143,7 +143,7 @@ public class ProductosAPIREST {
         });
 
         //Precio medio total
-        Spark.get("/Productos/mediaprecios", (request, response) -> {
+        Spark.get("/productos/mediaprecios", (request, response) -> {
             Double media = dao_prod.mediaPrecios();
             if (media!=null){
                 return media.toString();
@@ -154,7 +154,7 @@ public class ProductosAPIREST {
         });
 
         //ordenar por precio de mayor a menor
-        Spark.get("/Productos/may_men",(request, response) -> {
+        Spark.get("/productos/may_men",(request, response) -> {
             response.type("application/json");
             List<Productos> orden=dao_prod.mayormenorPrecios();
             if (orden!=null){
@@ -166,7 +166,7 @@ public class ProductosAPIREST {
         });
 
         //ordenar por precio de menor a mayor
-        Spark.get("/Productos/men_may",(request, response) -> {
+        Spark.get("/productos/men_may",(request, response) -> {
             response.type("application/json");
             List<Productos> orden=dao_prod.menormayorPrecios();
             if (orden!=null){
@@ -179,7 +179,7 @@ public class ProductosAPIREST {
 
 
         // Endpoint para obtener un resumen con solo el nombre el precio y la URL
-        Spark.get("/Productos/resumenobjetos", (request, response) -> {
+        Spark.get("/productos/resumenobjetos", (request, response) -> {
             List<ProductosDTO> resumen = dao_prod.devolverNombreImagenes();
             if (resumen!=null){
                 return gson.toJson(resumen);
@@ -192,7 +192,7 @@ public class ProductosAPIREST {
 
         //Crear un nuevo producto
 
-        Spark.post("/Productos/registrar",((request, response) -> {
+        Spark.post("/productos/registrar",((request, response) -> {
             String body = request.body();
             Productos newProd=gson.fromJson(body, Productos.class);
 
@@ -206,7 +206,7 @@ public class ProductosAPIREST {
         }));
 
         // Endpoint para actualizar un producto por su ID
-        Spark.put("/Productos/update/:id", (request, response) -> {
+        Spark.put("/productos/update/:id", (request, response) -> {
             Long id = Long.parseLong(request.params(":id"));
             String body = request.body();
 
@@ -223,7 +223,7 @@ public class ProductosAPIREST {
         });
 
         // Endpoint para eliminar un producto por su ID
-        Spark.delete("/Productos/:id", (request, response) -> {
+        Spark.delete("/productos/:id", (request, response) -> {
             Long id = Long.parseLong(request.params(":id"));
             boolean eliminado = dao_prod.deleteById(id);
             if (eliminado) {
@@ -235,7 +235,7 @@ public class ProductosAPIREST {
         });
 
         // Endopoint para eliminar todos los productos
-        Spark.delete("/Productos/delete",(request, response) -> {
+        Spark.delete("/productos/delete",(request, response) -> {
             boolean arrasar = dao_prod.deleteAll();
             if (arrasar){
                 return "Se ha vaciado el inventario";
@@ -277,64 +277,64 @@ public class ProductosAPIREST {
 
 
         /**
-         * Consultas de la clase Inventarios
+         * Consultas de la clase Almacen
          */
 
 
 //        //Mostrar todos los inventarios
-//        Spark.get("/inventarios",((request, response) -> {
-//            response.type("appication/json");
-//            List<Inventarios> inventarios=dao_inv.mostrarTodos();
-//            if (inventarios!=null){
-//                return gson.toJson(inventarios);
-//            }else {
-//                response.status(404);
-//                return "Inventario no encontrado";
-//            }
-//        }));
+        Spark.get("/almacen",((request, response) -> {
+            response.type("appication/json");
+            List<Almacen> inventarios=dao_alm.mostrarTodos();
+            if (inventarios!=null){
+                return gson.toJson(inventarios);
+            }else {
+                response.status(404);
+                return "Almacen no encontrado";
+            }
+        }));
 //
 //        //ordenar por fechas de mayor a menor
-//        Spark.get("/inventarios/may_men_fech",(request, response) -> {
-//            response.type("application/json");
-//            List<Inventarios> orden=dao_inv.mayormenorFecha();
-//            if (orden!=null){
-//                return gson.toJson(orden);
-//            }else {
-//                response.status(404);
-//                return "Inventario no encontrado";
-//            }
-//        });
+        Spark.get("/almacen/may_men_fech",(request, response) -> {
+            response.type("application/json");
+            List<Almacen> orden=dao_alm.mayormenorFecha();
+            if (orden!=null){
+                return gson.toJson(orden);
+            }else {
+                response.status(404);
+                return "Inventario no encontrado";
+            }
+        });
 //
 //        //Buscar fechas antiguas a nuevas
-//        Spark.get("/inventarios/men_may_fech",(request, response) -> {
-//            response.type("application/json");
-//            List<Inventarios> orden=dao_inv.menormayorFecha();
-//            if (orden!=null){
-//                return gson.toJson(orden);
-//            }else {
-//                response.status(404);
-//                return "Inventario no encontrado";
-//            }
-//        });
+        Spark.get("/almacen/men_may_fech",(request, response) -> {
+            response.type("application/json");
+            List<Almacen> orden=dao_alm.menormayorFecha();
+            if (orden!=null){
+                return gson.toJson(orden);
+            }else {
+                response.status(404);
+                return "Inventario no encontrado";
+            }
+        });
 //
 //
 //        //buscarEntreFechas
-//        Spark.get("/inventarios/buscar_fechas/:min_fech/:max_fech", (request, response) -> {
-//            LocalDate min_fech = LocalDate.parse(request.params(":min_fech"));
-//            LocalDate max_fech = LocalDate.parse(request.params(":max_fech"));
-//
-//            // Formatear las fechas al formato de la base de datos 'yyyy-MM-dd'
-//            String formattedMinFech = min_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//            String formattedMaxFech = max_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//
-//            List<Inventarios> inventarios = dao_inv.buscarporFechas(LocalDate.parse(formattedMinFech), LocalDate.parse(formattedMaxFech));
-//            if (inventarios!=null){
-//                return gson.toJson(inventarios);
-//            }else {
-//                response.status(404);
-//                return "Inventario no encontrado";
-//            }
-//        });
+        Spark.get("/almacen/buscar_fechas/:min_fech/:max_fech", (request, response) -> {
+            LocalDate min_fech = LocalDate.parse(request.params(":min_fech"));
+            LocalDate max_fech = LocalDate.parse(request.params(":max_fech"));
+
+            // Formatear las fechas al formato de la base de datos 'yyyy-MM-dd'
+            String formattedMinFech = min_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String formattedMaxFech = max_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            List<Almacen> inventarios = dao_alm.buscarporFechas(LocalDate.parse(formattedMinFech), LocalDate.parse(formattedMaxFech));
+            if (inventarios!=null){
+                return gson.toJson(inventarios);
+            }else {
+                response.status(404);
+                return "Inventario no encontrado";
+            }
+        });
 
 
 
@@ -355,32 +355,18 @@ public class ProductosAPIREST {
         });
 
 
-//        Spark.get("/inventario/categorias/:nombre", (request, response) -> {
-//            String nombre = String.valueOf(request.params(":nombre"));
-//            String categorias = dao_asoc.productoCategorias(nombre);
-//
-//            if (categorias.isEmpty()) {
-//                response.status(404); // Código de estado HTTP 404 - No encontrado
-//                return "No se encontraron categorías para el producto con ID: " + nombre;
-//            } else {
-//                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
-//                return gson.toJson(categorias);
-//            }
-//        });
-
-
-// Endpoint para obtener un resumen con solo el nombre el precio y la URL
         Spark.get("/inventario/categorias/:nombre", (request, response) -> {
-            List<ProductosDTO> resumen = dao_prod.devolverNombreImagenes();
-            if (resumen!=null){
-                return gson.toJson(resumen);
-            }else {
-                response.status(404);
-                return "Categorias no encontradas";
+            String nombre = String.valueOf(request.params(":nombre"));
+            String categorias = dao_asoc.inventarioCategorias(nombre);
+
+            if (categorias.isEmpty()) {
+                response.status(404); // Código de estado HTTP 404 - No encontrado
+                return "No se encontraron categorías para el producto con ID: " + nombre;
+            } else {
+                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
+                return gson.toJson(categorias);
             }
         });
-
-
 
 
         Spark.exception(Exception.class, (e, req, res) -> {

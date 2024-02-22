@@ -12,4 +12,5 @@ public interface AsociacionesDAOInterface {
 
     Double mediaPreciosProveedor(String proveedor);
 
+    String inventarioCategorias(String almacen);
 }

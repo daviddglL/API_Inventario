@@ -35,29 +35,8 @@ INSERT INTO Productos (proveedor_key, Imagen, Nombre, Numero_Serie, Precio_Unita
 
 
 INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-07', 'Inventario 1');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-08', 'Inventario 1');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-09', 'Inventario 1');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-10', 'Inventario 1');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-11', 'Inventario 1');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-12', 'Inventario 1');
 INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-13', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-14', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-15', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-16', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-17', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-18', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-19', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-21', 'Inventario 2');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-22', 'Inventario 2');
 INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-23', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-24', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-25', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-26', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-27', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-28', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-29', 'Inventario 3');
-INSERT INTO Almacen ( Fecha_Inscripcion, nombre) VALUES ( '2024-02-20', 'Inventario 3');
-
 
 INSERT INTO producto_almacen (id_producto, id_almacen) VALUES (1,1);
 INSERT INTO producto_almacen (id_producto, id_almacen) VALUES (2,1);
@@ -86,25 +65,25 @@ INSERT INTO producto_almacen (id_producto, id_almacen) VALUES (23,3);
 
 
 INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-001', 'Nombre1', 123456789, 1);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-002', 'Nombre2', 987654321, 2);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-003', 'Nombre3', 123456789, 3);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-004', 'Nombre4', 123456789, 4);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-005', 'Nombre5', 123456789, 5);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-006', 'Nombre6', 123456789, 6);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-007', 'Nombre7', 123456789, 7);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-008', 'Nombre8', 123456789, 8);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-009', 'Nombre9', 123456789, 9);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-010', 'Nombre10', 123456789, 10);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-011', 'Nombre11', 123456789, 11);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-012', 'Nombre12', 123456789, 12);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-013', 'Nombre13', 123456789, 13);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-014', 'Nombre14', 123456789, 14);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-015', 'Nombre15', 123456789, 15);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-016', 'Nombre16', 123456789, 16);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-017', 'Nombre17', 123456789, 17);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-018', 'Nombre18', 123456789, 18);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-019', 'Nombre19', 123456789, 19);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-020', 'Nombre20', 123456789, 20);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-021', 'Nombre21', 123456789, 21);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-022', 'Nombre22', 123456789, 22);
-INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-023', 'Nombre23', 123456789, 23);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-002', 'Nombre2', 987654321, 1);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-003', 'Nombre3', 123456789, 1);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-004', 'Nombre4', 123456789, 1);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-005', 'Nombre5', 123456789, 1);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-006', 'Nombre6', 123456789, 1);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-007', 'Nombre7', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-008', 'Nombre8', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-009', 'Nombre9', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-010', 'Nombre10', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-011', 'Nombre11', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-012', 'Nombre12', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-013', 'Nombre13', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-014', 'Nombre14', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-015', 'Nombre15', 123456789, 2);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-016', 'Nombre16', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-017', 'Nombre17', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-018', 'Nombre18', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-019', 'Nombre19', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-020', 'Nombre20', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-021', 'Nombre21', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-022', 'Nombre22', 123456789, 3);
+INSERT INTO Arrendatario (n_Serie, nombre, telefono, almacen_key) VALUES ('NS-023', 'Nombre23', 123456789, 3);
