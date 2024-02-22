@@ -27,11 +27,11 @@ public class Productos implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "producto_categoria",
+            name = "producto_almacen",
             joinColumns = @JoinColumn(name = "id_producto"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoria")
+            inverseJoinColumns = @JoinColumn(name = "id_almacen")
     )
-    private List<Categorias> cat=new ArrayList<>();
+    private List<Almacen> alma=new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="proveedor_key",foreignKey = @ForeignKey(name = "fk_mueble_prov"))
@@ -104,12 +104,12 @@ public class Productos implements Serializable {
         this.ns = ns;
     }
 
-    public List<Categorias> getCat() {
-        return cat;
+    public List<Almacen> getAlma() {
+        return alma;
     }
 
-    public void setCat(List<Categorias> cat) {
-        this.cat = cat;
+    public void setAlma(List<Almacen> alma) {
+        this.alma = alma;
     }
 
     @Override

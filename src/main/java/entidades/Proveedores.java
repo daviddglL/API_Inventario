@@ -39,25 +39,11 @@ public class Proveedores implements Serializable {
     public Proveedores() {
     }
 
-    @OneToMany(mappedBy = "prov",fetch = FetchType.LAZY)
-    private List<Inventarios> provee=new ArrayList<>();
-
-    public List<Inventarios> getAlmacen() {
-        return provee;
-    }
     public Proveedores( String nombre, String origen, String telefono, String email) {
         this.nombre = nombre;
         this.origen = origen;
         this.telefono = telefono;
         this.email = email;
-    }
-
-    public List<Inventarios> getProvee() {
-        return provee;
-    }
-
-    public void setProvee(List<Inventarios> provee) {
-        this.provee = provee;
     }
 
     public List<Productos> getProd() {

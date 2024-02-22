@@ -9,7 +9,6 @@ import dao.Inventario.InventarioDAOInterface;
 import dao.Productos.ProductosDAOInterface;
 import dao.Proveedores.ProveedoresDAOInterface;
 import dto.ProductosDTO;
-import entidades.Categorias;
 import entidades.Inventarios;
 import entidades.Productos;
 import entidades.Proveedores;
@@ -359,21 +358,30 @@ public class ProductosAPIREST {
         });
 
 
-        Spark.get("/inventario/categorias/:id_producto", (request, response) -> {
-            Long idProducto = Long.parseLong(request.params(":id_producto"));
-            List<Categorias> categorias = dao_asoc.productoCategorias(idProducto);
+//        Spark.get("/inventario/categorias/:nombre", (request, response) -> {
+//            String nombre = String.valueOf(request.params(":nombre"));
+//            String categorias = dao_asoc.productoCategorias(nombre);
+//
+//            if (categorias.isEmpty()) {
+//                response.status(404); // Código de estado HTTP 404 - No encontrado
+//                return "No se encontraron categorías para el producto con ID: " + nombre;
+//            } else {
+//                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
+//                return gson.toJson(categorias);
+//            }
+//        });
 
-            if (categorias.isEmpty()) {
-                response.status(404); // Código de estado HTTP 404 - No encontrado
-                return "No se encontraron categorías para el producto con ID: " + idProducto;
-            } else {
-                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
-                return gson.toJson(categorias);
+
+// Endpoint para obtener un resumen con solo el nombre el precio y la URL
+        Spark.get("/inventario/categorias/:nombre", (request, response) -> {
+            List<ProductosDTO> resumen = dao_prod.devolverNombreImagenes();
+            if (resumen!=null){
+                return gson.toJson(resumen);
+            }else {
+                response.status(404);
+                return "Categorias no encontradas";
             }
         });
-
-
-
 
 
 
