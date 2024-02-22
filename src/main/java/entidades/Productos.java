@@ -25,6 +25,10 @@ public class Productos implements Serializable {
     @Expose
     private String ns;
 
+    @Column(name = "Categoria",length = 100)
+    @Expose
+    private String categoria;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "producto_almacen",
@@ -47,12 +51,21 @@ public class Productos implements Serializable {
 
     public Productos() {}
 
-    public Productos(Long id, String nombre, Double precio_uni, String imagen,String ns) {
+    public Productos(Long id, String nombre, Double precio_uni, String imagen,String ns, String categoria) {
         this.id_producto = id;
         this.nombre = nombre;
         this.precio_uni = precio_uni;
         this.imagen = imagen;
         this.ns=ns;
+        this.categoria = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public Proveedores getProd() {

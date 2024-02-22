@@ -22,8 +22,8 @@
 
         <!-- entities -->
         <mapping class="entidades.Productos"/>
-        <mapping class="entidades.Categorias"/>
-        <mapping class="entidades.Inventarios"/>
+        <mapping class="entidades.Arrendatario"/>
+        <mapping class="entidades.Almacen"/>
         <mapping class="entidades.Proveedores"/>
 
 

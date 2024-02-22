@@ -26,13 +26,13 @@ public class Arrendatario implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "almacen_key", foreignKey = @ForeignKey(name = "fk_cli_alm"))
-    private Productos almacen;
+    private Almacen almacen;
 
     public Arrendatario() {
     }
 
 
-    public Arrendatario(Long id_arrendatario, String n_Serie, String nombre, Integer telefono, Productos almacen) {
+    public Arrendatario(Long id_arrendatario, String n_Serie, String nombre, Integer telefono, Almacen almacen) {
         this.id_arrendatario = id_arrendatario;
         this.n_Serie = n_Serie;
         this.nombre = nombre;
@@ -40,6 +40,13 @@ public class Arrendatario implements Serializable {
         this.almacen = almacen;
     }
 
+    public Almacen getAlmacen() {
+        return almacen;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
+    }
 
     public Long getId_arrendatario() {
         return id_arrendatario;
@@ -73,13 +80,6 @@ public class Arrendatario implements Serializable {
         this.telefono = telefono;
     }
 
-    public Productos getAlmacen() {
-        return almacen;
-    }
-
-    public void setAlmacen(Productos almacen) {
-        this.almacen = almacen;
-    }
 
 
     @Override

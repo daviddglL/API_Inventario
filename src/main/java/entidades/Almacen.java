@@ -17,11 +17,13 @@ public class Almacen implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Expose
     private Long id_almacen;
-
+    @Column(name = "Nombre")
+    @Expose
+    private  String nombre;
 
     @ManyToMany(mappedBy = "alma")
     private List<Productos> producto=new ArrayList<>();
-    @OneToMany(mappedBy = "almacen_key",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "almacen",fetch = FetchType.LAZY)
     private List<Arrendatario> almacen=new ArrayList<>();
     @Column(name = "Fecha_Inscripcion",nullable = false)
     @Expose
@@ -30,11 +32,24 @@ public class Almacen implements Serializable {
     public Almacen() {
     }
 
-    public Almacen(Long id, LocalDate fecha_inscripcion) {
+    public Almacen(Long id, LocalDate fecha_inscripcion, String nombre) {
+        this.nombre=nombre;
         this.id_almacen = id;
         this.fecha_inscripcion = fecha_inscripcion;
+
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<Productos> getProducto() {
+        return producto;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public void setProducto(List<Productos> producto) {
         this.producto = producto;

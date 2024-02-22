@@ -4,12 +4,11 @@ import com.appslandia.common.gson.LocalDateAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.Asociaciones.AsociacionesDAOInterface;
-import dao.Categorias.CategoriasDAOInterface;
+
 import dao.Inventario.InventarioDAOInterface;
 import dao.Productos.ProductosDAOInterface;
 import dao.Proveedores.ProveedoresDAOInterface;
 import dto.ProductosDTO;
-import entidades.Inventarios;
 import entidades.Productos;
 import entidades.Proveedores;
 import spark.Spark;
@@ -22,7 +21,6 @@ import java.util.List;
 public class ProductosAPIREST {
 
     private AsociacionesDAOInterface dao_asoc;
-    private CategoriasDAOInterface dao_cat;
     private InventarioDAOInterface dao_inv;
     private ProductosDAOInterface dao_prod;
     private ProveedoresDAOInterface dao_prov;
@@ -31,10 +29,9 @@ public class ProductosAPIREST {
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
             .excludeFieldsWithoutExposeAnnotation().create();
 
-    public ProductosAPIREST(AsociacionesDAOInterface imple_asoc, InventarioDAOInterface imple_inv, CategoriasDAOInterface imple_cat, ProveedoresDAOInterface imple_prov, ProductosDAOInterface imple_prod) throws Exception {
+    public ProductosAPIREST(AsociacionesDAOInterface imple_asoc, InventarioDAOInterface imple_inv, ProveedoresDAOInterface imple_prov, ProductosDAOInterface imple_prod) throws Exception {
         Spark.port(8080);
         dao_asoc =imple_asoc;
-        dao_cat=imple_cat;
         dao_inv=imple_inv;
         dao_prod=imple_prod;
         dao_prov=imple_prov;
@@ -284,60 +281,60 @@ public class ProductosAPIREST {
          */
 
 
-        //Mostrar todos los inventarios
-        Spark.get("/inventarios",((request, response) -> {
-            response.type("appication/json");
-            List<Inventarios> inventarios=dao_inv.mostrarTodos();
-            if (inventarios!=null){
-                return gson.toJson(inventarios);
-            }else {
-                response.status(404);
-                return "Inventario no encontrado";
-            }
-        }));
-
-        //ordenar por fechas de mayor a menor
-        Spark.get("/inventarios/may_men_fech",(request, response) -> {
-            response.type("application/json");
-            List<Inventarios> orden=dao_inv.mayormenorFecha();
-            if (orden!=null){
-                return gson.toJson(orden);
-            }else {
-                response.status(404);
-                return "Inventario no encontrado";
-            }
-        });
-
-        //Buscar fechas antiguas a nuevas
-        Spark.get("/inventarios/men_may_fech",(request, response) -> {
-            response.type("application/json");
-            List<Inventarios> orden=dao_inv.menormayorFecha();
-            if (orden!=null){
-                return gson.toJson(orden);
-            }else {
-                response.status(404);
-                return "Inventario no encontrado";
-            }
-        });
-
-
-        //buscarEntreFechas
-        Spark.get("/inventarios/buscar_fechas/:min_fech/:max_fech", (request, response) -> {
-            LocalDate min_fech = LocalDate.parse(request.params(":min_fech"));
-            LocalDate max_fech = LocalDate.parse(request.params(":max_fech"));
-
-            // Formatear las fechas al formato de la base de datos 'yyyy-MM-dd'
-            String formattedMinFech = min_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            String formattedMaxFech = max_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-            List<Inventarios> inventarios = dao_inv.buscarporFechas(LocalDate.parse(formattedMinFech), LocalDate.parse(formattedMaxFech));
-            if (inventarios!=null){
-                return gson.toJson(inventarios);
-            }else {
-                response.status(404);
-                return "Inventario no encontrado";
-            }
-        });
+//        //Mostrar todos los inventarios
+//        Spark.get("/inventarios",((request, response) -> {
+//            response.type("appication/json");
+//            List<Inventarios> inventarios=dao_inv.mostrarTodos();
+//            if (inventarios!=null){
+//                return gson.toJson(inventarios);
+//            }else {
+//                response.status(404);
+//                return "Inventario no encontrado";
+//            }
+//        }));
+//
+//        //ordenar por fechas de mayor a menor
+//        Spark.get("/inventarios/may_men_fech",(request, response) -> {
+//            response.type("application/json");
+//            List<Inventarios> orden=dao_inv.mayormenorFecha();
+//            if (orden!=null){
+//                return gson.toJson(orden);
+//            }else {
+//                response.status(404);
+//                return "Inventario no encontrado";
+//            }
+//        });
+//
+//        //Buscar fechas antiguas a nuevas
+//        Spark.get("/inventarios/men_may_fech",(request, response) -> {
+//            response.type("application/json");
+//            List<Inventarios> orden=dao_inv.menormayorFecha();
+//            if (orden!=null){
+//                return gson.toJson(orden);
+//            }else {
+//                response.status(404);
+//                return "Inventario no encontrado";
+//            }
+//        });
+//
+//
+//        //buscarEntreFechas
+//        Spark.get("/inventarios/buscar_fechas/:min_fech/:max_fech", (request, response) -> {
+//            LocalDate min_fech = LocalDate.parse(request.params(":min_fech"));
+//            LocalDate max_fech = LocalDate.parse(request.params(":max_fech"));
+//
+//            // Formatear las fechas al formato de la base de datos 'yyyy-MM-dd'
+//            String formattedMinFech = min_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//            String formattedMaxFech = max_fech.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//
+//            List<Inventarios> inventarios = dao_inv.buscarporFechas(LocalDate.parse(formattedMinFech), LocalDate.parse(formattedMaxFech));
+//            if (inventarios!=null){
+//                return gson.toJson(inventarios);
+//            }else {
+//                response.status(404);
+//                return "Inventario no encontrado";
+//            }
+//        });
 
 
 

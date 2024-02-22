@@ -1,6 +1,6 @@
 package dao.Asociaciones;
 
-import dto.CategoriasDTO;
+
 import entidades.Productos;
 import entidades.Proveedores;
 import org.hibernate.Session;
@@ -56,20 +56,5 @@ public class AsociacionesDAO implements AsociacionesDAOInterface{
         return media;
     }
 
-    @Override
-    public List<CategoriasDTO> devolverNombreImagenes() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        List<CategoriasDTO> categorias = session.createQuery("select new dto.CategoriasDTO(m.categoria, m.inventario) from Productos m", CategoriasDTO.class).list();
-
-        session.close();
-
-        return categorias;
-    }
-//    SELECT t3.Nombre
-//    Select t3.Nombre FROM entidades.Inventarios t1
-//    INNER JOIN entidades.Productos t2 ON t1.id = t2.id_producto
-//    INNER JOIN producto_categoria pc ON t2.id_producto = pc.id_producto
-//    INNER JOIN Categoria t3 ON pc.id_categoria = t3.id_categoria
-//    WHERE t1.Nombre =:nombre
 }

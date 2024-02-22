@@ -1,7 +1,6 @@
 package dao.Productos;
 
 import dto.ProductosDTO;
-import entidades.Inventarios;
 import org.hibernate.Session;
 import entidades.Productos;
 import util.HibernateUtil;
