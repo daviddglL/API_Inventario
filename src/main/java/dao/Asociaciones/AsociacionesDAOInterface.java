@@ -4,7 +4,7 @@ package dao.Asociaciones;
 import entidades.Productos;
 import entidades.Proveedores;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface AsociacionesDAOInterface {
 
@@ -12,5 +12,6 @@ public interface AsociacionesDAOInterface {
 
     Double mediaPreciosProveedor(String proveedor);
 
-    String inventarioCategorias(String almacen);
+    Long almacencantidad(Long almacen);
+    ArrayList<Productos> obtenerProductosProveedor(Proveedores p);
 }

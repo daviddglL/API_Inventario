@@ -26,8 +26,13 @@ public class ProveedoresDAO implements ProveedoresDAOInterface{
 
     @Override
     public Proveedores buscarPorId(Long id){
+        Proveedores p=null;
         Session session=HibernateUtil.getSessionFactory().openSession();
-        Proveedores p =session.find(Proveedores.class,id);
+        try{
+         p =session.find(Proveedores.class,id);
+        }catch (Exception e){
+            System.out.println(e);
+        }
         session.close();
         return  p;
     }

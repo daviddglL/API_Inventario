@@ -15,6 +15,7 @@ import spark.Spark;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -111,7 +112,7 @@ public class ProductosAPIREST {
         });
 
         //buscarEntrePreciosCategoria
-        Spark.get("/Productos/buscar_marcas/:min/:max/:listcategorias", (request, response) -> {
+        Spark.get("/productos/buscar_marcas/:min/:max/:listcategorias", (request, response) -> {
             Double min = Double.parseDouble(request.params(":min"));
             Double max = Double.parseDouble(request.params(":max"));
             String categoriasParap = request.params(":listcategorias");
@@ -355,18 +356,27 @@ public class ProductosAPIREST {
         });
 
 
-        Spark.get("/inventario/categorias/:nombre", (request, response) -> {
-            String nombre = String.valueOf(request.params(":nombre"));
-            String categorias = dao_asoc.inventarioCategorias(nombre);
-
-            if (categorias.isEmpty()) {
-                response.status(404); // Código de estado HTTP 404 - No encontrado
-                return "No se encontraron categorías para el producto con ID: " + nombre;
-            } else {
-                // Convertir la lista de categorías a formato JSON y devolverla como respuesta
-                return gson.toJson(categorias);
+        Spark.get("/almacen/cantidad/:id", (request, response) -> {
+            Long id = Long.valueOf(request.params(":id"));
+            Long total = dao_asoc.almacencantidad(id);
+            if (total!=null){
+                return total.toString();
+            }else {
+                response.status(404);
+                return "Precio no encontrado";
             }
         });
+
+        Spark.get("/productos/productos/:id", (request, response) -> {
+            Long id = Long.parseLong(request.params(":id"));
+            Proveedores pr= dao_prov.buscarPorId(id);
+            ArrayList<Productos> p = dao_asoc.obtenerProductosProveedor(pr);
+            response.type("application/json");
+            return gson.toJson(p);
+        });
+
+
+
 
 
         Spark.exception(Exception.class, (e, req, res) -> {

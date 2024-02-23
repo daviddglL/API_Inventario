@@ -46,6 +46,7 @@ public class Proveedores implements Serializable {
         this.email = email;
     }
 
+
     public List<Productos> getProd() {
         return prod;
     }
