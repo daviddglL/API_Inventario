@@ -13,4 +13,6 @@ public interface AlmacenDAOInterface {
     List<Almacen> mayormenorFecha();
 
     List<Almacen> buscarporFechas(LocalDate min_fech, LocalDate max_fech);
+
+    Almacen buscarPorId(Long id);
 }

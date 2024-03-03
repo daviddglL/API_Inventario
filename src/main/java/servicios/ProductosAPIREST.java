@@ -246,12 +246,7 @@ public class ProductosAPIREST {
             }
         });
 
-        //En caso de intentar un endpoint incorrecto
-        Spark.notFound((request, response) -> {
-            response.type("application/json");
-            return "{\"error\": \"Ruta no encontrada\",\"hint1\": \"/productos\"," +
-                    "\"hint2\": \"/productos/paginado/:pagina/:tam_pagina\",\"hint3\": \"/productos/id/:id\"}";
-        });
+
 
 
 
@@ -367,13 +362,63 @@ public class ProductosAPIREST {
             }
         });
 
-        Spark.get("/productos/productos/:id", (request, response) -> {
+        Spark.get("/proveedor/productos/:id", (request, response) -> {
             Long id = Long.parseLong(request.params(":id"));
             Proveedores pr= dao_prov.buscarPorId(id);
-            ArrayList<Productos> p = dao_asoc.obtenerProductosProveedor(pr);
+
             response.type("application/json");
-            return gson.toJson(p);
+            if (pr!=null){
+                List<Productos> productos= dao_asoc.obtenerProductosProveedor(pr);
+                return gson.toJson(productos);
+            }else {
+                response.status(404);
+                return "Proveedor no encontrado";
+            }
+
         });
+
+
+
+
+        // Enpoint obtener productos de los almacenes
+        Spark.get("/productos/almacenes/:id", (request, response) -> {
+            Long id = Long.parseLong(request.params(":id"));
+            Almacen p= dao_alm.buscarPorId(id);
+            List<Productos> c = dao_asoc.almacenesconProductos(p);
+            response.type("application/json");
+            return gson.toJson(c);
+        });
+
+
+        // Enpoint obtener almacenes de productos
+                Spark.get("/almacen/productos/:id_alm", (request, response) -> {
+                    Long id = Long.parseLong(request.params(":id_alm"));
+                    Productos c= dao_prod.buscarPorId(id);
+                    List<Almacen> a = dao_asoc.almacendelproducto(c);
+                    response.type("application/json");
+                    return gson.toJson(a);
+                });
+
+
+
+        //añadir nuevo producto al almacen
+        Spark.post("/productos/almacen/:idalm/:idpro", (request, response) -> {
+            Long idpro = Long.parseLong(request.params(":idpro"));
+            Long idalm = Long.parseLong(request.params(":idalm"));
+            Productos p= dao_prod.buscarPorId(idpro);
+            Almacen a= dao_alm.buscarPorId(idalm);
+            response.type("application/json");
+            return gson.toJson(dao_asoc.nuevoProductoAlmacen(p,a));
+        });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -385,6 +430,13 @@ public class ProductosAPIREST {
             res.body("Excepcion en tu codigo"); // Mensaje de error para el cliente
         });
 
+
+        //En caso de intentar un endpoint incorrecto
+        Spark.notFound((request, response) -> {
+            response.type("application/json");
+            return "{\"error\": \"Ruta no encontrada\",\"hint1\": \"/productos\"," +
+                    "\"hint2\": \"/productos/paginado/:pagina/:tam_pagina\",\"hint3\": \"/productos/id/:id\"}";
+        });
 
     }
 

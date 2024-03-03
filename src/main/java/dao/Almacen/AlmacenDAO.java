@@ -1,6 +1,7 @@
 package dao.Almacen;
 
 import entidades.Almacen;
+import entidades.Proveedores;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
@@ -75,6 +76,19 @@ public class AlmacenDAO implements AlmacenDAOInterface{
             System.out.println(e.getMessage());
         }
         return filtro;
+    }
+
+    @Override
+    public Almacen buscarPorId(Long id){
+        Almacen p=null;
+        Session session=HibernateUtil.getSessionFactory().openSession();
+        try{
+            p =session.find(Almacen.class,id);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        session.close();
+        return  p;
     }
 
 }
